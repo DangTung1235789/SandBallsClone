@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    BallsManager ballsManager;
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        Ground ground = collision.gameObject.GetComponent<Ground>();
+        if(ground != null)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetBallsManager(BallsManager ballsManager)
     {
-        
+        this.ballsManager = ballsManager;
+    }
+
+    private void OnDestroy()
+    {
+        ballsManager.DeleteBall(this);
     }
 }

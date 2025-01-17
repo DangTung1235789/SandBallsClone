@@ -64,6 +64,8 @@ public class RuntimeCircleClipper : MonoBehaviour, IClip
 
     private float cameraZPos;
 
+    public static Action ActionTouch;
+
     public bool CheckBlockOverlapping(Vector2f p, float size)
     {
         if (touchPhase == TouchPhase.Began)
@@ -142,6 +144,8 @@ public class RuntimeCircleClipper : MonoBehaviour, IClip
     {
         if (TouchUtility.TouchCount > 0)
         {
+            ActionTouch?.Invoke();
+
             Touch touch = TouchUtility.GetTouch(0);
             Vector2 touchPosition = touch.position;
 
